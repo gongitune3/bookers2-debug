@@ -1,38 +1,24 @@
-<div class="container">
-	<div class="row">
-    	<div class="col-md-4 col-md-offset-4">
-			<h2>User info</h2>
-			<% if @user.errors.any? %>
-			    <div id="error_explanation" class="alert alert-danger">
-			    	<h4><%= pluralize(@user.errors.count, "error") %>prohibited this user from being saved:</h4>
-			        <ul>
-			            <% @user.errors.full_messages.each do |message| %>
-			            	<li><%= message %></li>
-			            <% end %>
-			         </ul>
-			    </div>
-			<% end %>
-			<%= form_for(@user) do |f| %>
-			<div class="field">
-				<%= f.label :name %>
-				<%= f.text_field :name, class: "name" %>
-			</div>
+<h2>User info</h2>
 
-			<div class="field">
-				<%= f.label :image %>
-				<%= f.attachment_field :profile_image, class: "user_image" %>
-			</div>
+<%= form_for(@user) do |f| %>
+  <%= render 'layouts/errors', obj: @user %>
 
-			<div class="field">
-				<%= f.label :introduction %>
-				<%= f.text_area :introduction, class: "introduction" %>
-			</div>
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "name" %>
+  </div>
 
-			<div class="actions">
-				<%= f.submit %>
-			</div>
+  <div class="field">
+    <%= f.label :image %>
+    <%= f.attachment_field :profile_image, class: "user_image" %>
+  </div>
 
-			<% end %>
-		</div>
-	</div>
-</div>
+  <div class="field">
+    <%= f.label :introduction %>
+    <%= f.text_area :introduction, class: "introduction" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

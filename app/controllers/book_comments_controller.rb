@@ -2,23 +2,32 @@ class BookCommentsController < ApplicationController
     
     
     def create
-        book = Book.find(params[:book_id])
-        book_comment = book.book_comments.new(book_comment_params)
-        book_comment.user_id = current_user.id
-        if  book_comment.save
-            redirect_back(fallback_location: books_path)
+        @book = Book.find(params[:book_id])
+        @book_new = Book.new
+        @book_comment = @book.book_comments.new(book_comment_params)
+        @book_comment.user_id = current_user.id
+        if @book_comment.save
+          flash[:success] = "Comment was successfully created."
+          redirect_to book_path(@book)
         else
-            redirect_to book_path(book.id)
+          @book_comments = BookComment.where(book_id: @book.id)
+          render '/books/show'
         end
-    end
-
-    def destroy
-        book_comment = BookComment.find_by(params[:book_id])
-        book_comment.destroy
-        redirect_back(fallback_location: books_path)
-    end
-
-    def book_comment_params
+      end
+    
+      def destroy
+        @book_comment = BookComment.find(params[:book_id])
+        if @book_comment.user != current_user
+          redirect_to request.referer
+        end
+        @book_comment.destroy
+        redirect_to request.referer
+      end
+    
+      private
+    
+      def book_comment_params
         params.require(:book_comment).permit(:comment)
+      end
+    
     end
-end
