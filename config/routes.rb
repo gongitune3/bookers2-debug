@@ -8,8 +8,9 @@ Rails.application.routes.draw do
 
   resources :books,only: [:show,:index,:edit,:update,:destroy,:create] do
     resource :favorites, only: [:create, :destroy]
-    resources :book_comments, only: [:create, :destroy]
+    resources :book_comments, only: [:create]
   end
+  resources :book_comments, only: [:destroy]
 
   root 'home#top'
   get 'home/about'
