@@ -35,15 +35,18 @@ class UsersController < ApplicationController
 	  
 	end
 
+	
+
 	private
-	  def user_params
-		 params.require(:user).permit(:name, :introduction, :profile_image)
-	  end
+	  	def user_params
+		 	params.require(:user).permit(:name, :introduction, :profile_image, :postcode, :prefecture_name, :address_city, :address_street, :address_building)
+	  	end
   
-	  def screen_user
-		unless params[:id].to_i == current_user.id
-		  redirect_to user_path(current_user)
+	  	def screen_user
+			unless params[:id].to_i == current_user.id
+		  		redirect_to user_path(current_user)
 		end
+
 	  end
   
   end

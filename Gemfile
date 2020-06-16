@@ -68,3 +68,11 @@ gem 'jquery-rails'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-rails'
+
+gem 'jp_prefecture'
+
+gem 'jquery-turbolinks'
+
+gem 'dotenv-rails'
+
+gem "geocoder"
