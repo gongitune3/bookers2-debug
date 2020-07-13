@@ -76,3 +76,8 @@ gem 'jquery-turbolinks'
 gem 'dotenv-rails'
 
 gem "geocoder"
+
+gem 'dotenv-rails'
+group :production do
+  gem 'mysql2'
+end
